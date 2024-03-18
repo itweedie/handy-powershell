@@ -1,4 +1,4 @@
-# PowerShell XML Node Updater
+# PowerShell Solution XML Node Updater
 
 This PowerShell script allows users to update the value of a specified node in an XML file. By supplying the location of the XML file, the node address (XPath), and the new value, users can easily modify XML nodes directly from the command line.
 
