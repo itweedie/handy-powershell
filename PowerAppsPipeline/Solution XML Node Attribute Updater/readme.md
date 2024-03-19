@@ -28,7 +28,7 @@ No installation is required. Ensure PowerShell is installed on your system. Down
 To use the script, open PowerShell and navigate to the directory where your script is located. Then, run the script with the required parameters:
 
 ```powershell
-.\UpdateXmlNodeAttribute.ps1 -xmlFilePath "C:\path\to\your\file.xml" -nodeXPath "/AppModule/LocalizedNames/LocalizedName" -attributeName "YourAttributeName" -newValue "YourNewValue"
+.\updateXMLNodeAttributeUpdater.ps1 -xmlFilePath "C:\path\to\your\file.xml" -nodeXPath "/AppModule/LocalizedNames/LocalizedName" -attributeName "YourAttributeName" -newValue "YourNewValue"
 ```
 Replace `C:\path\to\your\file.xml` with the path to your XML file, `/YourNodeXPath` with the XPath to your target node, `YourAttributeName` with the name of the attribute you wish to update, and `YourNewValue` with the value you wish to assign to the attribute.
 
