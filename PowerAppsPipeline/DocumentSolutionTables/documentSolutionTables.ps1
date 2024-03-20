@@ -6,7 +6,7 @@ param(
 # Validation: Check if locationOfUnpackedSolution and wikiLocation have been provided
 if (-not $locationOfUnpackedSolution -or -not $wikiLocation) {
     Write-Output "Both locationOfUnpackedSolution and wikiLocation parameters are required."
-    Write-Output "Usage: .\script.ps1 -locationOfUnpackedSolution 'C:\Dev\ClaimsHandling\ClaimsHandling\scr\solutions\ClaimsHandlingCore' -wikiLocation 'C:\Dev\hmwmt\blog\notes\CHS\test\11'"
+    Write-Output "Usage: .\script.ps1 -locationOfUnpackedSolution '<path_to_unpacked_solution>' -wikiLocation '<path_to_wiki_location>'"
     exit
 }
 
