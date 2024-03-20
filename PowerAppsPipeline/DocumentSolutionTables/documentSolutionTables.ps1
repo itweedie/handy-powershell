@@ -3,10 +3,11 @@ param(
     [string]$targetFolder
 )
 
-# Validation: Check if rootFolder and targetFolder have been provided
-if (-not $rootFolder -or -not $targetFolder) {
-    Write-Output "Both rootFolder and targetFolder parameters are required."
-    Write-Output "Usage: .\script.ps1 -rootFolder 'C:\path\to\your\rootFolder' -targetFolder 'C:\path\to\your\targetFolder'"
+
+# Validation: Check if locationOfUnpackedSolution and wikiLocation have been provided
+if (-not $locationOfUnpackedSolution -or -not $wikiLocation) {
+    Write-Output "Both locationOfUnpackedSolution and wikiLocation parameters are required."
+    Write-Output "Usage: .\script.ps1 -locationOfUnpackedSolution '<path_to_unpacked_solution>' -wikiLocation '<path_to_wiki_location>'"
     exit
 }
 
