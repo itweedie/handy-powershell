@@ -1,27 +1,30 @@
 param(
-    [string]$rootFolder,
-    [string]$targetFolder
+    [string]$locationOfUnpackedSolution,
+    [string]$wikiLocation
 )
 
-
-# Validation: Check if locationOfUnpackedSolution and wikiLocation have been provided
-if (-not $locationOfUnpackedSolution -or -not $wikiLocation) {
-    Write-Output "Both locationOfUnpackedSolution and wikiLocation parameters are required."
-    Write-Output "Usage: .\script.ps1 -locationOfUnpackedSolution '<path_to_unpacked_solution>' -wikiLocation '<path_to_wiki_location>'"
+# Validation: Check if rootFolder and targetFolder have been provided
+if (-not $rootFolder -or -not $targetFolder) {
+    Write-Output "Both rootFolder and targetFolder parameters are required."
+    Write-Output "Usage: .\script.ps1 -rootFolder 'C:\path\to\your\rootFolder' -targetFolder 'C:\path\to\your\targetFolder'"
     exit
 }
 
-Write-Output "Root folder set to: $rootFolder"
-Write-Output "Target folder for Markdown files set to: $targetFolder"
+# Construct the path to the entities folder
+$entitiesFolder = Join-Path -Path $locationOfUnpackedSolution -ChildPath "entities"
 
-# Check if the target folder exists; if not, create it
-if (-not (Test-Path -Path $targetFolder)) {
-    New-Item -ItemType Directory -Path $targetFolder
-    Write-Output "Created target folder at: $targetFolder"
+Write-Output "Solution folder set to: $locationOfUnpackedSolution"
+Write-Output "Entities folder set to: $entitiesFolder"
+Write-Output "Wiki location for Markdown files set to: $wikiLocation"
+
+# Check if the wiki location exists; if not, create it
+if (-not (Test-Path -Path $wikiLocation)) {
+    New-Item -ItemType Directory -Path $wikiLocation
+    Write-Output "Created wiki location at: $wikiLocation"
 }
 
-# Get all subdirectories in the root folder
-$entityFolders = Get-ChildItem -Path $rootFolder -Directory
+# Get all subdirectories in the entities folder
+$entityFolders = Get-ChildItem -Path $entitiesFolder -Directory
 
 foreach ($folder in $entityFolders) {
     Write-Output "Processing folder: $($folder.FullName)"
@@ -52,8 +55,8 @@ foreach ($folder in $entityFolders) {
             $markdownContent += "| $($attribute.Name) | $($attribute.Type) | $displayName | $($attribute.RequiredLevel) | $($attribute.IsCustomField) | $($attribute.IsSearchable) |`n"
         }
 
-        # Define the output Markdown file name using the entity name and saving it to the target folder
-        $mdFileName = Join-Path -Path $targetFolder -ChildPath "$entityName.md"
+        # Define the output Markdown file name using the entity name and saving it to the wiki location
+        $mdFileName = Join-Path -Path $wikiLocation -ChildPath "$entityName.md"
         # Save the Markdown content to a file
         $markdownContent | Out-File -FilePath $mdFileName -Encoding UTF8
         Write-Output "Markdown documentation generated for entity '$entityName' at: $mdFileName"
